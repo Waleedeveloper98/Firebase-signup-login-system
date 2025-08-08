@@ -4,29 +4,24 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { auth } from "../../config/firebase";
 import { useNavigate } from "react-router-dom";
+import authErrors from "../authErrors";
+import Loader from "./Loader";
 
-const LoginForm = ({ isVisible, handlePasswordVisible }) => {
+const LoginForm = () => {
+  const [isVisible, setIsVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  const handlePasswordVisible = () => {
+    setIsVisible((prev) => !prev);
+  };
+
   const handleSignIn = async (e) => {
     e.preventDefault();
     setLoading(true);
-    if (email.trim() === "" && password.trim() === "") {
-      toast("Please Fill Form!", {
-        icon: "👏",
-        style: {
-          borderRadius: "10px",
-          background: "#333",
-          color: "#fff",
-        },
-      });
-      setLoading(false)
-      return;
-    }
-    if (email.trim === "" || password.trim() === "") {
+    if (!email.trim() || !password.trim()) {
       toast("Please Fill All Fields!", {
         icon: "👏",
         style: {
@@ -35,7 +30,7 @@ const LoginForm = ({ isVisible, handlePasswordVisible }) => {
           color: "#fff",
         },
       });
-      setLoading(false)
+      setLoading(false);
       return;
     }
     try {
@@ -44,54 +39,9 @@ const LoginForm = ({ isVisible, handlePasswordVisible }) => {
       setLoading(false);
       navigate("/home");
     } catch (error) {
-      let msg = "";
-      switch (error.code) {
-        case "auth/email-already-in-use":
-          msg = "This email is already registered.";
-          break;
-
-        case "auth/invalid-email":
-          msg = "The email format is incorrect.";
-          break;
-
-        case "auth/operation-not-allowed":
-          msg = "Email/password accounts are not enabled in Firebase.";
-          break;
-
-        case "auth/weak-password":
-          msg = "Password should be at least 6 characters.";
-          break;
-
-        case "auth/missing-email":
-          msg = "Please enter your email.";
-          break;
-
-        case "auth/internal-error":
-          msg = "An internal error occurred. Please try again.";
-          break;
-
-        case "auth/network-request-failed":
-          msg = "Network error. Please check your internet connection.";
-          break;
-
-        case "auth/too-many-requests":
-          msg = "Too many attempts. Please try again later.";
-          break;
-
-        case "auth/invalid-credential":
-          msg = "Invalid credentials provided.";
-          break;
-
-        case "auth/invalid-password":
-          msg = "Invalid password. Please try again.";
-          break;
-
-        default:
-          msg = "Signup failed. Please try again.";
-      }
       console.log(error.code);
       setLoading(false);
-      toast.error(msg);
+      toast.error(authErrors(error));
     }
   };
 
@@ -107,16 +57,16 @@ const LoginForm = ({ isVisible, handlePasswordVisible }) => {
       <div className="relative">
         <input
           className="input-design"
-          type={isVisible === false ? "password" : "text"}
+          type={isVisible ? "text" : "password"}
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <div className="icon" onClick={handlePasswordVisible}>
-          {isVisible === false ? (
-            <Eye className="w-5 h-5" />
-          ) : (
+          {isVisible ? (
             <EyeOff className="w-5 h-5" />
+          ) : (
+            <Eye className="w-5 h-5" />
           )}
         </div>
       </div>
@@ -125,14 +75,7 @@ const LoginForm = ({ isVisible, handlePasswordVisible }) => {
         className="btn flex items-center justify-center"
         type="submit"
       >
-        {loading ? (
-          <div
-            className="loader border-t-2 rounded-full border-gray-100  animate-spin
-aspect-square w-8 flex justify-center items-center "
-          ></div>
-        ) : (
-          <span className="select-none">Log In</span>
-        )}
+        {loading ? <Loader /> : <span className="select-none">Log In</span>}
       </button>
     </form>
   );

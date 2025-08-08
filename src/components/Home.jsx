@@ -2,12 +2,20 @@ import { signOut } from "firebase/auth";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../config/firebase";
+import toast from "react-hot-toast";
 
 const Home = ({ user }) => {
   const navigate = useNavigate();
-  const handleSignout = () => {
-    signOut(auth);
-    navigate("/login");
+
+  const handleSignout = async () => {
+    try {
+      await signOut(auth);
+      navigate("/login");
+      toast.success("Sign-out Successfully");
+    } catch (error) {
+      toast.error("Sign-out failed");
+      console.log(`Sign-out failed: ${error}`);
+    }
   };
   return (
     <div className="w-full h-screen bg-white flex flex-col items-center justify-center gap-6">
