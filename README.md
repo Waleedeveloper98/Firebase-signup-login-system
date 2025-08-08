@@ -1,12 +1,18 @@
-# React + Vite
+🔐 Firebase Login System
+A simple login and signup system built with React, Vite, Firebase Authentication, and Tailwind CSS. Includes protected routes, form validation, toast notifications, and route guards.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 Features
+🔑 Firebase Email/Password Authentication
 
-Currently, two official plugins are available:
+🛡️ Protected Routes using useEffect and React Router
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+📦 Environment variable support for Firebase config
 
-## Expanding the ESLint configuration
+🎨 Tailwind CSS for styling
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+🔁 Auto-redirect if already logged in
+
+🔐 Password visibility toggle
+
+📦 Toast notifications via react-hot-toast
+
