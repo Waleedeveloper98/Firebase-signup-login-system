@@ -4,7 +4,7 @@ import LoginForm from "./LoginForm";
 
 const Login = () => {
   return (
-    <section className="wrapper-box">
+    <section className="wrapper-box h-fit">
       <h2 className="title">Log In</h2>
       <LoginForm />
       <p className="text-zinc-500 ">

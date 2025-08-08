@@ -16,19 +16,18 @@ const App = () => {
   useEffect(() => {
     setLoading(true);
     const unsubscribe = onAuthStateChanged(auth, (newUser) => {
-      if (newUser) {
-        setUser(newUser);
-        if (location.pathname === "/login") {
-          navigate("/home");
-        }
-      } else if (!newUser && location.pathname !== "/login") {
+      setUser(newUser);
+      if (newUser && ["/login", "/signup"].includes(location.pathname)) {
+        navigate("/home");
+      }
+      if (!newUser && !["/login", "/signup"].includes(location.pathname)) {
         navigate("/login");
       }
       setLoading(false);
     });
 
     return () => unsubscribe();
-  }, [user, location.pathname, navigate]);
+  }, [location.pathname]);
 
   if (loading) {
     return (

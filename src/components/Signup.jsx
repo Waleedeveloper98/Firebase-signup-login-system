@@ -4,7 +4,7 @@ import SignupForm from "./SignupForm";
 
 const Signup = () => {
   return (
-    <section className="wrapper-box">
+    <section className="wrapper-box h-fit">
       <h2 className="title">Sign up</h2>
       <SignupForm />
       <p className="text-zinc-500 ">

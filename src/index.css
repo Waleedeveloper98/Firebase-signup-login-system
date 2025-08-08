@@ -18,7 +18,7 @@
 }
 
 .wrapper-box {
-    @apply w-4/5 h-4/5 sm:w-3/5 md:w-1/2 lg:w-[30vw] rounded-lg bg-white shadow-xl p-4 flex flex-col gap-10 items-center pt-16
+    @apply w-4/5 sm:w-3/5 md:w-1/2 lg:w-[30vw] rounded-lg bg-white shadow-xl p-4 flex flex-col gap-10 items-center pt-16
 }
 
 .title {

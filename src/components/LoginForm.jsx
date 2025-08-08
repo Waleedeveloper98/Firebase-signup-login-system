@@ -45,7 +45,7 @@ const LoginForm = () => {
   };
 
   return (
-    <form className="flex flex-col gap-6 w-full">
+    <form className="flex flex-col gap-6 w-full pb-10">
       <input
         className="input-design"
         type="email"

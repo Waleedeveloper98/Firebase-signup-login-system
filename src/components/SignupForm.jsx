@@ -49,14 +49,14 @@ const SignupForm = () => {
   };
 
   return (
-    <form className="flex flex-col gap-6 w-full">
+    <form className="flex flex-col gap-6 w-full pb-10">
       <input
         className="input-design"
         type="text"
         placeholder="Name"
         name="name"
         value={name}
-        onBlur={(e) => setName(e.target.value)}
+        onChange={(e) => setName(e.target.value)}
       />
       <input
         className="input-design"
@@ -64,7 +64,7 @@ const SignupForm = () => {
         placeholder="Email"
         name="email"
         value={email}
-        onBlur={(e) => setEmail(e.target.value)}
+        onChange={(e) => setEmail(e.target.value)}
       />
       <div className="relative">
         <input
@@ -73,7 +73,7 @@ const SignupForm = () => {
           placeholder="Password"
           name="password"
           value={password}
-          onBlur={(e) => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <div className="icon" onClick={handlePasswordVisible}>
           {isVisible === false ? (
