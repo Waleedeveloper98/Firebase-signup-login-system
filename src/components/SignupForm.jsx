@@ -1,4 +1,5 @@
 import { Eye, EyeOff } from "lucide-react";
+import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase";
 import toast from "react-hot-toast";
 import { useState } from "react";
@@ -35,6 +36,7 @@ const SignupForm = () => {
     }
     try {
       await createUserWithEmailAndPassword(auth, email, password);
+      await auth.signOut();
       toast.success("Successfully Sign up!");
       setLoading(false);
       setName("");
