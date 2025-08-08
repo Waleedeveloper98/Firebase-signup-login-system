@@ -20,3 +20,6 @@
 .link-span{
     @apply text-lg cursor-pointer text-blue-600 hover:text-blue-700 font-medium transition-all duration-200
 }
+.icon{
+    @apply absolute right-3 w-5 h-5 text-zinc-700 cursor-pointer top-1/2 -translate-y-1/2
+}

@@ -2,11 +2,14 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import LoginForm from "./LoginForm";
 
-const Login = () => {
+const Login = ({ isVisible, handlePasswordVisible }) => {
   return (
     <section className="wrapper-box">
       <h2 className="title">Log In</h2>
-      <LoginForm />
+      <LoginForm
+        handlePasswordVisible={handlePasswordVisible}
+        isVisible={isVisible}
+      />
       <p className="text-zinc-500 ">
         Don’t have an account?{" "}
         <Link to={"/signup"} className="link-span">
