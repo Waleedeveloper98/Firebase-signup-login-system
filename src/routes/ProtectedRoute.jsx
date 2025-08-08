@@ -7,7 +7,7 @@ const ProtectedRoute = ({ user, children }) => {
     if (!user) {
       navigate("/login");
     }
-  }, []);
+  }, [user]);
   return <div className="w-full">{children}</div>;
 };
 

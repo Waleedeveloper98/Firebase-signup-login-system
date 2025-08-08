@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 import { auth } from "../../config/firebase";
 import { useNavigate } from "react-router-dom";
 import authErrors from "../authErrors";
-import Loader from "./Loader";
 
 const LoginForm = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -75,7 +74,14 @@ const LoginForm = () => {
         className="btn flex items-center justify-center"
         type="submit"
       >
-        {loading ? <Loader /> : <span className="select-none">Log In</span>}
+        {loading ? (
+          <div
+            className="loader border-t-2 rounded-full border-zinc-100  animate-spin
+aspect-square w-8 flex justify-center items-center "
+          ></div>
+        ) : (
+          <span className="select-none">Log In</span>
+        )}
       </button>
     </form>
   );

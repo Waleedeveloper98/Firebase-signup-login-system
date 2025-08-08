@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Signup from "./components/Signup";
-import Login from "./components/Login";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import Home from "./components/Home";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../config/firebase";
-import ProtectedRoute from "./routes/ProtectedRoute";
 import Loader from "./components/Loader";
 import AppRoutes from "./routes/AppRoutes";
 
@@ -19,28 +15,20 @@ const App = () => {
 
   useEffect(() => {
     setLoading(true);
-    try {
-      const unsubscribe = onAuthStateChanged(auth, (newUser) => {
-        if (newUser) {
-          setUser(newUser);
-          setLoading(false);
-          if (location.pathname !== "/home") {
-            navigate("/home");
-          }
-        } else {
-          setUser(null);
-          setLoading(false);
-          if (location.pathname !== "/login") {
-            navigate("/login");
-          }
+    const unsubscribe = onAuthStateChanged(auth, (newUser) => {
+      if (newUser) {
+        setUser(newUser);
+        if (location.pathname === "/login") {
+          navigate("/home");
         }
-      });
-    } catch (error) {
-      console.log(error);
-    }
+      } else if (!newUser && location.pathname !== "/login") {
+        navigate("/login");
+      }
+      setLoading(false);
+    });
 
     return () => unsubscribe();
-  }, []);
+  }, [user, location.pathname, navigate]);
 
   if (loading) {
     return (
